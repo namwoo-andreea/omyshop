@@ -1,13 +1,18 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 
-from cart.forms import CartAddProductForm
+from .forms import CartAddProductForm
 from shop.models import Product
 from .cart import Cart
 
 
 def cart_detail(request):
     cart = Cart(request)
+    # Iterate each item in cart to add form to update quantity.
+    for item in cart:
+        item['update_quantity_form'] = CartAddProductForm(
+            initial={'quantity': item['quantity'],
+                     'update': True})
     return render(request, 'cart/detail.html',
                   {'cart': cart})
 
