@@ -13,6 +13,8 @@ import json
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from braintree import Configuration, Environment
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_SECRET_DIR = os.path.join(BASE_DIR, '.config_secret')
 
@@ -137,3 +139,15 @@ CART_SESSION_KEY = 'cart'
 
 # Email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Braintree
+BRAINTREE_MERCHANT_ID = config_secret_common["BRAINTREE"]["MERCHANT_ID"],
+BRAINTREE_PUBLIC_KEY = config_secret_common["BRAINTREE"]["PUBLIC_KEY"],
+BRAINTREE_PRIVATE_KEY = config_secret_common["BRAINTREE"]["PRIVATE_KEY"]
+
+Configuration.configure(
+    Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY
+)
