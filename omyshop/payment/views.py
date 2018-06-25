@@ -1,5 +1,6 @@
 import braintree
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 
 from orders.models import Order
 
@@ -42,8 +43,8 @@ def payment_process(request):
 
 
 def payment_done(request):
-    render(request, 'payment/done.html')
+    return render(request, 'payment/done.html')
 
 
 def payment_canceled(request):
-    render(request, 'payment/canceled.html')
+    return render(request, 'payment/canceled.html')
