@@ -142,8 +142,8 @@ CART_SESSION_KEY = 'cart'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Braintree
-BRAINTREE_MERCHANT_ID = config_secret_common["BRAINTREE"]["MERCHANT_ID"],
-BRAINTREE_PUBLIC_KEY = config_secret_common["BRAINTREE"]["PUBLIC_KEY"],
+BRAINTREE_MERCHANT_ID = config_secret_common["BRAINTREE"]["MERCHANT_ID"]
+BRAINTREE_PUBLIC_KEY = config_secret_common["BRAINTREE"]["PUBLIC_KEY"]
 BRAINTREE_PRIVATE_KEY = config_secret_common["BRAINTREE"]["PRIVATE_KEY"]
 
 Configuration.configure(
