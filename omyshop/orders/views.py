@@ -23,12 +23,13 @@ def order_create(request):
                                          product=item['product'],
                                          price=item['price'],
                                          quantity=item['quantity'])
-            # Clear the cart.
+            # Clear the cart
             cart.clear()
+            # Send order confirmation email
             order_created.delay(order.id)
-            # Set the order in session.
+            # Set the order in session
             request.session['order_id'] = order.id
-            # Redirect to payment process.
+            # Redirect to payment process
             return redirect(reverse('payment:process'))
     else:
         form = OrderCreateForm()
