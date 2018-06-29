@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 
 from coupons.forms import CouponApplyForm
+from shop.recommender import Recommender
 from .forms import CartAddProductForm
 from shop.models import Product
 from .cart import Cart
@@ -15,9 +16,14 @@ def cart_detail(request):
             initial={'quantity': item['quantity'],
                      'update': True})
     coupon_apply_form = CouponApplyForm()
+
+    r = Recommender()
+    cart_products = [item['product'] for item in cart]
+    recommend_products = r.suggest_products(cart_products)
     return render(request, 'cart/detail.html',
                   {'cart': cart,
-                   'coupon_apply_form': coupon_apply_form})
+                   'coupon_apply_form': coupon_apply_form,
+                   'recommend_products':recommend_products})
 
 
 @require_POST

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 
 from cart.forms import CartAddProductForm
+from .recommender import Recommender
 from .models import Category, Product
 
 
@@ -23,6 +24,10 @@ def product_detail(request, id, slug):
                                 slug=slug,
                                 available=True)
     cart_add_form = CartAddProductForm()
+
+    r = Recommender()
+    recommend_products = r.suggest_products([product])
     return render(request, 'shop/product/detail.html',
                   {'product': product,
-                   'cart_add_form': cart_add_form})
+                   'cart_add_form': cart_add_form,
+                   'recommend_products': recommend_products})
